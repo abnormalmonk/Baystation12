@@ -497,7 +497,7 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/clothing/under/under = w_uniform
 		if(under.accessories.len)
 			for(var/obj/item/clothing/accessory/A in under.accessories)
-				standing.overlays |= A.get_mob_overlay()
+				standing.overlays |= A.get_mob_overlay(src)
 
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
@@ -581,8 +581,9 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	if(l_ear || r_ear)
-		var/image/both = image("icon" = null)
-		
+		// Blank image upon which to layer left & right overlays.
+		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
+
 		if(l_ear)
 			var/image/standing
 			var/t_type = l_ear.icon_state
@@ -776,7 +777,7 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/clothing/suit/suit = wear_suit
 		if(istype(suit) && suit.accessories.len)
 			for(var/obj/item/clothing/accessory/A in suit.accessories)
-				standing.overlays |= A.get_mob_overlay()
+				standing.overlays |= A.get_mob_overlay(src)
 
 		overlays_standing[SUIT_LAYER]	= standing
 		update_tail_showing(0)
